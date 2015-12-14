@@ -1,0 +1,31 @@
+commit 73fb0faee822376dc44f4d148e1667167efa1abc
+Author: jorgeucano <jorgeucano@gmail.com>
+Date:   Mon Dec 14 19:55:25 2015 -0300
+
+    estoy modificando el orientation
+
+commit 7e664cc31e32a4a2305b4699ffa7a377c1a209d4
+Author: jorgeucano <jorgeucano@gmail.com>
+Date:   Mon Dec 14 15:47:50 2015 -0300
+
+    iOS
+
+commit 48312a08b16ac960a2feddef518eae9d9d9920c2
+Author: Jorge Cano <jorgeucano@gmail.com>
+Date:   Fri Dec 11 21:39:13 2015 -0300
+
+    Create README.md
+
+commit 425f2530e4ad198b535eaa8d26cae92a39bb58d4
+Author: jorgeucano <jorgeucano@gmail.com>
+Date:   Fri Dec 11 21:37:28 2015 -0300
+
+    Initial Commit -> If necessary IONIC (npm install .-g ionic)
+    
+    For use type in command line
+    
+    ionic platform add android
+    ionic platform add ios
+    
+    ionic serve -> for server in navigator
+    ionic build -> for build app

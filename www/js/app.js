@@ -48,7 +48,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngRoute'])
     $scope.test = "create table";
   }, function (err) {
     //if exist
-    console.error(err);
+    console.log(err);
 
     //sync to server
       var query = "select * from cuestionario where sync = 0";
@@ -63,14 +63,14 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngRoute'])
                   $cordovaSQLite.execute(db, update).then(function(res) {
                     console.log("insert fine");
                   }, function (err) {
-                    console.error(err);
+                    console.log(err);
                   });
                 }
             });
         }
       }, function (err) {
         //fail execute query
-        console.error(err);
+        console.log(err);
       });
     //sync 
 
@@ -81,23 +81,23 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngRoute'])
 
   $scope.guardar = function(){
 
-    //alert("entro" + $scope.email + $scope.opcion);
-    var query = "INSERT INTO cuestionario (email, opcion, sync) VALUES (?,?, 0)";
+    
+    var query = "INSERT INTO test_table (email, opcion, sync) VALUES (?,?, 0)";
     $cordovaSQLite.execute(db, query, [$scope.email, $scope.opcion]).then(function(res) {
       console.log("insert fine");
       $scope.email = "";
       $scope.opcion = "";
     }, function (err) {
-      console.error(err);
+      console.log(err);
     });
   }
 
   $scope.createTable = function(){
-    var query = "CREATE TABLE cuestionario(ID INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL, opcion TEXT NOT NULL, sync INT NOT NULL);";
+    var query = "CREATE TABLE test_table(ID INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL, opcion TEXT NOT NULL, sync INT NOT NULL);";
     $cordovaSQLite.execute(db, query).then(function(res) {
       $scope.test = "create table";
     }, function (err) {
-      console.error(err);
+      console.log(err);
     });
   }
 
@@ -108,28 +108,28 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngRoute'])
     $cordovaSQLite.execute(db, query).then(function(res) {
       $scope.test ="drop tablecorrect";
     }, function (err) {
-      console.error(err);
+      console.log(err);
     });
   }
 
   $scope.insert = function() {
-    var query = "INSERT INTO test_table (data, data_num) VALUES (?,?)";
+    var query = "INSERT INTO test_table (email, option) VALUES (?,?)";
     $cordovaSQLite.execute(db, query, ["test", 100]).then(function(res) {
       console.log("insert fine");
     }, function (err) {
-      console.error(err);
+      console.log(err);
     });
   };
 
   $scope.list = function(){
-    var query = "select * from cuestionario";
+    var query = "select * from test_table";
     $cordovaSQLite.execute(db, query, []).then(function(res) {
       $scope.test = "";
       for (var i = 0; i < res.rows.length; i++) {
           console.log(res.rows.item(i));
       }
     }, function (err) {
-      console.error(err);
+      console.log(err);
     });
   }
 

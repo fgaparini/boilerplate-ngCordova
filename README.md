@@ -2,6 +2,6 @@ boilerplate ngCordova with all platforms
 
 @jorgeucano
 
-for http://www.escueladevrock.com
+for offline database and sync
 
 #fullStackJS

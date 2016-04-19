@@ -28,16 +28,29 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngRoute'])
       controller: "MyCtrl",
       templateUrl:"templates/main.html"
     })
+    .when("/drop",{
+      controller: "DropCtrl",
+      templateUrl:"templates/drop.html"
+    })
+    .when("/create",{
+      controller: "CreateCtrl",
+      templateUrl:"templates/create.html"
+    })
+    .when("/list",{
+      controller: "listCtrl",
+      templateUrl:"templates/list.html"
+    })
+    .when("/add",{
+      controller: "AddCtrl",
+      templateUrl:"templates/add.html"
+    })
     .otherwise({ redirectTo: '/' })
 })
 
 
-.controller('MyCtrl', function($scope, $ionicPlatform, $cordovaSQLite, $http) {
-
-
+.controller('MyCtrl', function($scope, $ionicPlatform, $cordovaSQLite, $http, $location) {
 
   //inicializacion
-
   db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser or mobile
 
 
@@ -77,32 +90,17 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngRoute'])
   });
 
 
+  $scope.redirectTo = function (redirect){
+      $location.path(redirect);
+  };
 
 
-  $scope.guardar = function(){
+})
 
-    
-    var query = "INSERT INTO test_table (email, opcion, sync) VALUES (?,?, 0)";
-    $cordovaSQLite.execute(db, query, [$scope.email, $scope.opcion]).then(function(res) {
-      console.log("insert fine");
-      $scope.email = "";
-      $scope.opcion = "";
-    }, function (err) {
-      console.log(err);
-    });
-  }
+.controller('DropCtrl', function($scope, $ionicPlatform, $cordovaSQLite, $http) {
 
-  $scope.createTable = function(){
-    var query = "CREATE TABLE test_table(ID INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL, opcion TEXT NOT NULL, sync INT NOT NULL);";
-    $cordovaSQLite.execute(db, query).then(function(res) {
-      $scope.test = "create table";
-    }, function (err) {
-      console.log(err);
-    });
-  }
-
-
-
+  //inicializacion
+  db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser or mobile
   $scope.dropTable = function (){
     var query = "DROP TABLE test_table";
     $cordovaSQLite.execute(db, query).then(function(res) {
@@ -111,15 +109,28 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngRoute'])
       console.log(err);
     });
   }
+})
 
-  $scope.insert = function() {
-    var query = "INSERT INTO test_table (email, option) VALUES (?,?)";
-    $cordovaSQLite.execute(db, query, ["test", 100]).then(function(res) {
-      console.log("insert fine");
+.controller('CreateCtrl', function($scope, $ionicPlatform, $cordovaSQLite, $http) {
+
+  //inicializacion
+  db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser or mobile
+
+  $scope.createTable = function(){
+    var query = "CREATE TABLE test_table(ID INTEGER PRIMARY KEY AUTOINCREMENT, email TEXT NOT NULL, opcion TEXT NOT NULL, sync INT NOT NULL);";
+    $cordovaSQLite.execute(db, query).then(function(res) {
+      $scope.test = "create table";
     }, function (err) {
-      console.log(err);
+      $scope.test = err;
     });
-  };
+  }
+
+})
+
+.controller('listCtrl', function($scope, $ionicPlatform, $cordovaSQLite, $http) {
+
+  //inicializacion
+  db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser or mobile
 
   $scope.list = function(){
     var query = "select * from test_table";
@@ -128,10 +139,28 @@ angular.module('starter', ['ionic', 'ngCordova', 'ngRoute'])
       for (var i = 0; i < res.rows.length; i++) {
           console.log(res.rows.item(i));
       }
+      $scope.test = res.rows;
     }, function (err) {
       console.log(err);
     });
   }
+})
 
+.controller('AddCtrl', function($scope, $ionicPlatform, $cordovaSQLite, $http) {
 
-});
+  //inicializacion
+  db = window.openDatabase("my.db", '1', 'my', 1024 * 1024 * 100); // browser or mobile
+
+  $scope.insert = function(){
+    var query = "INSERT INTO test_table (email, opcion, sync) VALUES (?,?, 0)";
+    $cordovaSQLite.execute(db, query, [$scope.campo1, $scope.campo2]).then(function(res) {
+      $scope.test = "insert fine";
+      $scope.email = "";
+      $scope.opcion = "";
+    }, function (err) {
+      console.log(err);
+    });
+  }
+  
+})
+;
